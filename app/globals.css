@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #f3efe6;
+  --color-surface: #faf7f0;
+  --color-card: #fffdf8;
+  --color-ink: #1b1712;
+  --color-soft: #4a4438;
+  --color-muted: #8b8171;
+  --color-faint: #b3a995;
+  --color-line: #e4dbc8;
+  --color-linefaint: #ece5d5;
+  --color-accent: #8f6b3f;
+  --color-accent-deep: #6f5230;
+  --color-champagne: #c9b08c;
+  --color-sage: #7c8465;
+  --color-clay: #9c4b33;
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-outfit);
+  --radius-card: 16px;
+  --shadow-soft: 0 14px 44px -18px rgb(27 23 18 / 0.18);
+  --shadow-lift: 0 22px 60px -20px rgb(27 23 18 / 0.28);
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: 0.008em;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* fine paper grain over everything, very quiet */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.micro {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.micro-lg {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-card);
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.btn-primary:active {
+  transform: scale(0.985);
+}
+
+.btn-bronze {
+  background: linear-gradient(135deg, #9a7547, #7c5a33 70%);
+  color: #f8f3e9;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px -12px rgb(111 82 48 / 0.65);
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+.btn-bronze:active {
+  transform: scale(0.985);
+  filter: brightness(1.05);
+}
+
+.btn-ghost {
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  border-radius: 999px;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--color-faint);
+}
+.btn-ghost:active {
+  transform: scale(0.985);
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  border-color: var(--color-champagne) !important;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(100deg, var(--color-linefaint) 40%, #f6f1e4 50%, var(--color-linefaint) 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* checkerboard hint behind transparent garment images in detail views */
+.alpha-grid {
+  background-image: radial-gradient(var(--color-linefaint) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
