@@ -1,41 +1,91 @@
-# ARMOIRE — your digital wardrobe
+# ARMOIRE
 
-A luxury-minimal wardrobe app: photograph your clothes, they get cut out and tagged,
-then Armoire styles them into outfits — swipeable top/bottom/shoes bands composing one
-picture (yes, like *Clueless*), scored for color harmony, weather, dress code and rotation.
+**Your wardrobe, as software.** Photograph your clothes; they get cut out and tagged.
+Then swipe tops, bottoms and shoes into one composed picture — scored live for colour
+harmony, weather, dress code and what you've actually been wearing.
 
-## Run
+Yes, like *Clueless*.
+
+Everything is **local-first**. Items, images, looks, wear history and plans live in your
+browser's IndexedDB. No account, no server, no cloud, nothing leaves the machine unless
+you opt into AI tagging.
+
+<!-- Add a screenshot or a short capture of the Studio screen here. It is the whole pitch
+     in one image and the repo is much weaker without it. -->
+
+---
+
+## Run it
 
 ```bash
 npm install
-npm run dev        # http://localhost:3985
+npm run dev
 ```
 
-Everything is **local-first**: items, images, looks, wear history and plans live in the
-browser's IndexedDB. No account, no cloud.
+<http://localhost:3985>
 
-## Optional AI tagging
+Requires Node 18+ and a Chromium or Firefox build with WebAssembly and IndexedDB — that
+is every current desktop browser. First upload downloads a ~40 MB background-removal
+model into browser cache; after that, cutouts work offline.
 
-Copy `.env.example` → `.env.local` and set `ANTHROPIC_API_KEY` to have Claude vision
-pre-fill category/colors/style/season/occasion on upload. Without a key the app still
-works: colors are detected locally and you confirm tags in the review step.
+### Optional AI tagging
 
-## Features
+```bash
+cp .env.example .env.local     # set ANTHROPIC_API_KEY
+```
 
-- **Add** — multi-photo upload, on-device background removal (~40 MB model, first use only),
-  auto color detection, AI or manual tagging, warmth/formality dials, price for cost-per-wear.
-- **Studio (main screen)** — swipe top / bottom / shoes independently, lock slots, add a
-  layer & bag, live match score with reasons, shuffle, save, "worn today".
-  **Dress me today** proposes 3–5 looks from weather (Open-Meteo), today's calendar events,
-  your favorite colors and what you wore recently.
-- **Closet** — grid with search ("black dress", "work winter", "unworn"), kind/color filters,
-  laundry state, wishlist with *pairs-with/unlocks* purchase preview, capsule builder.
-- **Looks** — saved looks, 7-day planner with per-day forecast + events + auto-plan, wear history.
-- **Insights** — most/least worn, cost per wear, color balance closet-vs-worn, seasonal usage,
-  versatility ranking, wardrobe gap suggestions, learned Style DNA.
-- **Pack** — destination + dates + agenda → minimal case with day-by-day outfits and checklist.
+With a key, Claude vision pre-fills category / colours / style / season / occasion on
+upload. **Without a key the app is fully functional** — colours are detected locally and
+you confirm tags in the review step. The key is used by a Next route on your own
+machine; photos are sent to Anthropic only when it is set.
+
+---
+
+## What it does
+
+**Add** — multi-photo upload, on-device background removal, automatic colour detection,
+AI or manual tagging, warmth and formality dials, purchase price for cost-per-wear.
+
+**Studio** — the main screen. Swipe top / bottom / shoes independently, lock a slot you
+like, add a layer and a bag. A live match score explains itself in words rather than
+just a number. Shuffle, save, mark "worn today".
+
+*Dress me today* proposes 3–5 complete looks from the weather (Open-Meteo, keyless),
+today's calendar events, your favourite colours and what you wore recently.
+
+**Closet** — grid with natural search: `black dress`, `work winter`, `unworn`. Filter by
+kind and colour, track laundry state, keep a wishlist that previews what a prospective
+purchase *pairs with* and *unlocks*. Capsule builder.
+
+**Looks** — saved outfits, a 7-day planner with per-day forecast and events, auto-plan,
+full wear history.
+
+**Insights** — most and least worn, cost per wear, closet-vs-worn colour balance,
+seasonal usage, versatility ranking, wardrobe gap suggestions, and a learned Style DNA.
+
+**Pack** — destination, dates and agenda become a minimal case: day-by-day outfits and a
+checklist, built from the smallest set of items that covers the trip.
+
+---
 
 ## Stack
 
-Next.js 16 · React 19 · Tailwind 4 · motion · Dexie (IndexedDB) · @imgly/background-removal
-(on-device) · Open-Meteo (keyless weather/geocoding) · optional Anthropic API route.
+Next.js 16 · React 19 · Tailwind 4 · motion · Dexie (IndexedDB) ·
+[@imgly/background-removal](https://github.com/imgly/background-removal-js) (on-device) ·
+[Open-Meteo](https://open-meteo.com) (keyless weather + geocoding) · optional Anthropic
+API route.
+
+---
+
+## Data and privacy
+
+There is no backend to breach. Your closet is rows in IndexedDB on one device — which
+also means **clearing site data deletes your wardrobe**, and there is currently no
+export or sync. If you are going to put real money's worth of clothing in here, that
+gap is worth knowing about up front.
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
