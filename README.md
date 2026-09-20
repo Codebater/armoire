@@ -10,8 +10,10 @@ Everything is **local-first**. Items, images, looks, wear history and plans live
 browser's IndexedDB. No account, no server, no cloud, nothing leaves the machine unless
 you opt into AI tagging.
 
-<!-- Add a screenshot or a short capture of the Studio screen here. It is the whole pitch
-     in one image and the repo is much weaker without it. -->
+<p align="center">
+  <img src="docs/studio.png" width="360"
+       alt="The Studio screen: a chambray shirt, tailored trousers and court sneakers composed into one outfit, scored 99 with the reasons 'tonal neutrals', 'made for 17 degrees' and 'very you'">
+</p>
 
 ---
 
